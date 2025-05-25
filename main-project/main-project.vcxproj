@@ -130,11 +130,13 @@
     <ClCompile Include="file_reader.cpp" />
     <ClCompile Include="filters.cpp" />
     <ClCompile Include="main-project.cpp" />
+    <ClCompile Include="sort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="conference_entry.h" />
     <ClInclude Include="file_reader.h" />
     <ClInclude Include="filters.h" />
+    <ClInclude Include="sort.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data.txt" />

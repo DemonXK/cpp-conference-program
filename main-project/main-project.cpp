@@ -1,4 +1,5 @@
-﻿
+﻿#include "sort.h"
+
 #include <iostream>
 #include <vector>
 #include "conference_entry.h"
@@ -32,6 +33,7 @@ int main() {
         std::cout << "1. Показать все доклады\n";
         std::cout << "2. Фильтрация (Иванов Иван Иванович)\n";
         std::cout << "3. Фильтрация (доклады > 15 минут)\n";
+        std::cout << "4. Сортировка\n";
         std::cout << "0. Выход\n";
         std::cout << "Выбор: ";
         std::cin >> choice;
@@ -50,7 +52,28 @@ int main() {
             showAll(filtered);
             break;
         }
+        case 4: {
+            std::vector<ConferenceEntry*> ptrs;
+            for (auto& e : data) ptrs.push_back(&e);
 
+            int sortMethod, compareMethod;
+            std::cout << "Выберите метод сортировки:\n1. Heap Sort\n2. Merge Sort\n> ";
+            std::cin >> sortMethod;
+
+            std::cout << "Выберите критерий:\n1. По убыванию длительности\n2. По фамилии и теме\n> ";
+            std::cin >> compareMethod;
+
+            CompareFunc cmpFuncs[] = { compareByDurationDesc, compareByAuthorThenTopic };
+            auto cmp = cmpFuncs[compareMethod - 1];
+
+            if (sortMethod == 1)
+                heapSort(ptrs, cmp);
+            else
+                mergeSort(ptrs, cmp);
+
+            for (auto* ptr : ptrs) printEntry(*ptr);
+            break;
+        }
         case 0:
             std::cout << "Выход...\n";
             break;
